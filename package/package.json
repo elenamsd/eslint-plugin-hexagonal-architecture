@@ -4,8 +4,8 @@
   "description": "A plugin that helps you to enforce hexagonal architecture best practises.",
   "main": "dist/src/index.js",
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint ..",
+    "lint:fix": "eslint .. --fix",
     "test": "jest -c jest.config.ts",
     "build": "tsc"
   },

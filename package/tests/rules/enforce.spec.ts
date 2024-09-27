@@ -3,7 +3,7 @@
 import { ESLintUtils } from "@typescript-eslint/utils";
 import fs from "fs";
 
-import rule from "../../src/rules/enforce";
+import rule from "../../package/src/rules/enforce";
 
 const ruleTester = new ESLintUtils.RuleTester({
   parser: "@typescript-eslint/parser",
