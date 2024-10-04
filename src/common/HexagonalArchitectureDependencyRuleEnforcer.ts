@@ -1,6 +1,4 @@
-import { TSESTree } from "@typescript-eslint/utils/dist/ts-estree";
-
-import { RuleContext } from "../rules/enforce";
+import {Rule} from "eslint";
 
 type ImportDeclarationNode = {
   type: string;
@@ -19,20 +17,20 @@ export class HexagonalArchitectureDependencyRuleEnforcer {
     infrastructure: ["application", "domain", "infrastructure"],
   };
 
-  public enforce(context: RuleContext, node: GeneralNode): void {
+  public enforce(context: Rule.RuleContext, node: GeneralNode): void {
     const nodeBody = node["body"];
 
     if (nodeBody !== undefined) {
       nodeBody
         .filter((value) => value.type === "ImportDeclaration")
         .forEach((value) => {
-          this.ensureImportIsValid(value.source.value, context, value as TSESTree.Node);
+          this.ensureImportIsValid(value.source.value, context, value as Rule.Node);
         });
     }
   }
 
-  private ensureImportIsValid(importText: string, context: RuleContext, node: TSESTree.Node): void {
-    const currentLayer = this.extractCurrentLayer(context.getFilename());
+  private ensureImportIsValid(importText: string, context: Rule.RuleContext, node: Rule.Node): void {
+    const currentLayer = this.extractCurrentLayer(context.filename);
     const forbiddenImports = this.layers.filter(
       (layer) => !this.dependenciesWildcard[currentLayer].includes(layer)
     );

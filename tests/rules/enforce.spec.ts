@@ -1,13 +1,10 @@
 "use strict";
 
-import { ESLintUtils } from "@typescript-eslint/utils";
 import fs from "fs";
-
+import {RuleTester} from "eslint";
 import rule from "../../src/rules/enforce";
 
-const ruleTester = new ESLintUtils.RuleTester({
-  parser: "@typescript-eslint/parser",
-});
+const ruleTester = new RuleTester();
 
 function readFile(path: string): string {
   return fs.readFileSync(path).toString();

@@ -1,10 +1,8 @@
-import { TSESTree } from "@typescript-eslint/utils/dist/ts-estree";
-
-import { RuleContext } from "../rules/enforce";
+import {Rule} from "eslint";
 
 export class HexagonalArchitectureFolderEnforcer {
-  public enforce(context: RuleContext, node: TSESTree.Node): void {
-    const filename = context.getFilename();
+  public enforce(context: Rule.RuleContext, node: Rule.Node): void {
+    const filename = context.filename;
 
     if (!this.hasCorrectFolderStructure(filename)) {
       context.report({ node, messageId: "folder-not-follow-hexagonal" });
