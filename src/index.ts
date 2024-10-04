@@ -1,9 +1,13 @@
 import enforce from "./rules/enforce";
 
-const config = {
+const plugin = {
+  meta: {
+    name: "eslint-plugin-hexagonal-architecture",
+    version: "1.0.3",
+  },
   rules: {
     enforce,
-  },
-};
+  }
+}
 
-export = config;
+module.exports = plugin;
