@@ -1,16 +1,29 @@
 "use strict";
 
 import fs from "fs";
-import {RuleTester} from "eslint";
-import rule from "../../src/rules/enforce";
+import { RuleTester } from "eslint";
+import { plugin } from "../../src/index";
+import path from "path";
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  languageOptions: {
+    parser: require("@typescript-eslint/parser"),
+    parserOptions: {
+      ecmaVersion: 2020,
+      sourceType: "module",
+      project: path.resolve(__dirname, './tsconfig.test.json'),
+    }
+  },
+  plugins: {
+    'hexagonal-architecture': plugin,
+  }
+});
 
 function readFile(path: string): string {
-  return fs.readFileSync(path).toString();
+  return fs.readFileSync(path, 'utf-8');
 }
 
-ruleTester.run("enforce", rule, {
+ruleTester.run("enforce", plugin.rules.enforce, {
   valid: [
     {
       name: "📁 folder named application",
